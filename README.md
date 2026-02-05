@@ -1,6 +1,6 @@
-# LightonPC (Delphi + Arduino via COM)
+# LightonPC (Python + Arduino via COM)
 
-Пример простого Windows EXE на Delphi (VCL), который подключается к Arduino через COM-порт и отправляет команды:
+Windows EXE на Python (Tkinter), который подключается к Arduino через COM-порт и отправляет команды:
 
 - `ON` — включить ленту
 - `OFF` — выключить ленту
@@ -8,16 +8,16 @@
 ## Что делает EXE
 
 - Позволяет выбрать COM-порт и baud rate.
-- Сохраняет настройки в `LightStripControl.ini` рядом с `.exe`.
-- По кнопкам **LED ON** / **LED OFF** отправляет строки в COM-порт.
+- Сохраняет настройки в JSON рядом с `.exe` (`lightonpc_settings.json`).
+- По кнопкам **LED ON** / **LED OFF** отправляет команды в COM-порт.
 
 ## Файлы проекта
 
-- `LightStripControl.dpr` — входная точка VCL-приложения.
-- `MainForm.pas` / `MainForm.dfm` — UI + логика кнопок и настроек.
-- `SerialPort.pas` — низкоуровневая работа с COM через WinAPI.
+- `lightonpc_py/main.py` — GUI + логика COM-управления и настройки.
+- `requirements.txt` — зависимости Python.
+- `build_exe.bat` — сборка EXE через PyInstaller.
 
-## Ожидаемый протокол с Arduino
+## Протокол с Arduino
 
 Приложение отправляет текстовые команды, завершая каждую переводом строки (`\n`):
 
@@ -56,10 +56,22 @@ void loop() {
 }
 ```
 
-## Как использовать
+## Как собрать EXE на Windows
 
-1. Залейте скетч в Arduino.
-2. Подключите Arduino к ПК по USB.
-3. Убедитесь, что скорость в приложении и в `Serial.begin(...)` совпадает (по умолчанию `9600`).
-4. Запустите EXE, выберите COM-порт.
-5. Нажмите **Connect**, затем **LED ON** / **LED OFF**.
+1. Установите Python 3.10+.
+2. Откройте `cmd` в папке проекта.
+3. Выполните:
+
+```bat
+build_exe.bat
+```
+
+Готовый файл будет здесь:
+
+- `dist\LightonPC-Python.exe`
+
+## Запуск без EXE (для разработки)
+
+```bash
+python lightonpc_py/main.py
+```
