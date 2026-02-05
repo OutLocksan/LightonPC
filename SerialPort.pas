@@ -55,7 +55,7 @@ begin
   if IsOpen then
     Close;
 
-  if Trim(APortName) = '' then
+  if APortName.Trim.IsEmpty then
     raise ESerialPortError.Create('COM-порт не указан.');
 
   FullPortName := '\\.\' + APortName;

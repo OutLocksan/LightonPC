@@ -109,8 +109,8 @@ var
 begin
   Ini := TIniFile.Create(SettingsFileName);
   try
-    Ini.WriteString('Serial', 'Port', Trim(CbComPort.Text));
-    Ini.WriteString('Serial', 'BaudRate', Trim(EdBaudRate.Text));
+    Ini.WriteString('Serial', 'Port', CbComPort.Text.Trim);
+    Ini.WriteString('Serial', 'BaudRate', EdBaudRate.Text.Trim);
   finally
     Ini.Free;
   end;
@@ -136,14 +136,14 @@ procedure TFrmMain.BtnConnectClick(Sender: TObject);
 var
   BaudRate: Integer;
 begin
-  if not TryStrToInt(Trim(EdBaudRate.Text), BaudRate) then
+  if not TryStrToInt(EdBaudRate.Text.Trim, BaudRate) then
   begin
     MessageDlg('Укажите корректный baud rate (например, 9600).', mtError, [mbOK], 0);
     Exit;
   end;
 
   try
-    FSerialPort.Open(Trim(CbComPort.Text), BaudRate);
+    FSerialPort.Open(CbComPort.Text.Trim, BaudRate);
     SaveSettings;
     SetControls;
   except
