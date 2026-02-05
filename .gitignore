@@ -1,0 +1,23 @@
+# Delphi legacy files (prevent accidental re-add)
+*.dpr
+*.pas
+*.dfm
+*.dproj
+*.lpi
+*.lpr
+
+# Python build/cache artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+
+# PyInstaller output
+build/
+dist/
+*.spec
+
+# IDE / OS junk
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
