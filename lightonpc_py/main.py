@@ -96,7 +96,7 @@ class LightonApp(tk.Tk):
         self.lbl_status.grid(row=4, column=0, columnspan=4, sticky="w", pady=(18, 0))
 
         self.lbl_signature = ttk.Label(frm, text="by Locksan")
-        self.lbl_signature.grid(row=5, column=0, sticky="sw", pady=(8, 0))
+        self.lbl_signature.grid(row=5, column=3, sticky="se", pady=(8, 0))
 
         for i in range(4):
             frm.columnconfigure(i, weight=1)
